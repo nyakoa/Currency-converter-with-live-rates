@@ -1,0 +1,90 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap");
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f5f7fa;
+  font-family: "Inter", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.container {
+  background-color: #ffffff;
+  padding: 2.5rem;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  max-width: 440px;
+  width: 95%;
+}
+
+h1 {
+  font-size: 1.7rem;
+  margin-bottom: 2rem;
+  color: #1a1a1a;
+  font-weight: 600;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2c2c2c;
+  margin-bottom: 0.3rem;
+}
+
+input,
+select {
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #cbd3db;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #1a1a1a;
+}
+
+input::placeholder {
+  color: #999;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #005fa3;
+  box-shadow: 0 0 0 2px rgba(0, 95, 163, 0.2);
+}
+
+button {
+  background-color: #005fa3;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #00457a;
+}
+
+#result {
+  margin-top: 2rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111;
+  background-color: #e8f5e9;
+  border-left: 4px solid #4caf50;
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Currency Converter with Live Rates</h1>
+      <form id="convert">
+        <label for="amount">Amount:</label>
+        <input id="amount" type="number" name="amount" placeholder="Amount" />
+
+        <label for="from">Currencies to exchange:</label>
+        <select id="from" name="from"></select>
+        <label for="to">Currencies to exchange:</label>
+        <select id="to" name="to"></select>
+        <button type="submit">Convert</button>
+      </form>
+      <p id="result"></p>
+    </div>
+    <script>
+      async function loadCurrencies() {
+        try {
+          const response = await fetch(
+            "https://api.currencylayer.com/list?access_key=a31f5de53720198c9c606a55ca1556b2"
+          );
+          const data = await response.json();
+          const currencies = data.currencies;
+          console.log(data);
+          for (const code in currencies) {
+            const name = code;
+            const option1 = document.createElement("option");
+            option1.value = name;
+            option1.textContent = name;
+
+            const option2 = option1.cloneNode(true);
+            from.appendChild(option1);
+            to.appendChild(option2);
+          }
+        } catch (error) {
+          console.error("Error fetching currency list:", error.message);
+        }
+      }
+      loadCurrencies();
+
+      const convert = document.getElementById("convert");
+
+      convert.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        const amount = document.getElementById("amount").value;
+        const from = document.getElementById("from").value;
+        const to = document.getElementById("to").value;
+        const result = document.getElementById("result");
+        try {
+          const response = await fetch("/convert", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              amount: amount,
+              from: from,
+              to: to,
+            }),
+          });
+          const data = await response.json();
+
+          result.textContent = `${amount} ${from} = ${data.converted} ${to} (1 ${from} = ${data.rate} ${to})`;
+        } catch (error) {
+          console.error("Error converting currency:", error);
+        }
+      });
+    </script>
+  </body>
+</html>
